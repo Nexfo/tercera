@@ -1,0 +1,7 @@
+bonsai_gestor_homepage:
+    pattern:  /
+    defaults: { _controller: BonsaiGestorBundle:Gestor:index }
+
+bonsai_gestor_registro:
+    pattern: /registrar
+    defaults: { _controller:  BonsaiGestorBundle:Usuarios:registrar }

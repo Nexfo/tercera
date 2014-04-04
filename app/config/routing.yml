@@ -1,0 +1,4 @@
+bonsai_gestor:
+    resource: "@BonsaiGestorBundle/Resources/config/routing.yml"
+    prefix:   /
+

@@ -1,0 +1,18 @@
+Bonsai\GestorBundle\Entity\Usuario:
+    type: entity
+    table: null
+    repositoryClass: Bonsai\GestorBundle\Entity\UsuarioRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        email:
+            type: string
+            length: '100'
+        pass:
+            type: string
+            length: '50'
+    lifecycleCallbacks: {  }
