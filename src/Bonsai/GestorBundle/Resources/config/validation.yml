@@ -1,0 +1,11 @@
+Bonsai\GestorBundle\Entity\Usuario:
+    properties:
+        email:
+            - NotBlank: ~
+            - Email:
+                message: The email "{{ value }}" is not a valid email.
+        pass:
+            - NotBlank: ~
+            - Length:
+                min: 3
+                minMessage: "Tu contrasena debe ser mas de {{ limit }} characters length"
