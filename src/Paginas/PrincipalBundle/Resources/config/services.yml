@@ -1,7 +1,0 @@
-parameters:
-#    paginas_principal.example.class: Paginas\PrincipalBundle\Example
-
-services:
-#    paginas_principal.example:
-#        class: %paginas_principal.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]

@@ -1,7 +1,0 @@
-parameters:
-#    usuarios_us.example.class: Usuarios\UsBundle\Example
-
-services:
-#    usuarios_us.example:
-#        class: %usuarios_us.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]

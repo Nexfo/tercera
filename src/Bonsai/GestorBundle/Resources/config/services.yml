@@ -1,7 +1,0 @@
-parameters:
-#    bonsai_gestor.example.class: Bonsai\GestorBundle\Example
-
-services:
-#    bonsai_gestor.example:
-#        class: %bonsai_gestor.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]

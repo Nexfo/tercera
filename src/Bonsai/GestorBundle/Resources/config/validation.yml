@@ -1,7 +1,0 @@
-Bonsai\GestorBundle\Entity\Bonsai:
-    properties:
-        nombre:
-            - NotBlank: ~
-            - Length:
-                max: 100
-                maxMessage: "El nombre no puede tener mas de {{ limit }} characters"
