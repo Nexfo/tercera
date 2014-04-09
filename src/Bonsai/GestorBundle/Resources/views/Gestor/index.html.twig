@@ -2,36 +2,27 @@
 
 {% block centro %}
 		{{ form_start(form) }}
-			<table style="margin: 0 auto">
-				<tr>
-					<td>
-						{{ form_row(form.accion) }}
-					</td>
-					<td>
-						<table>
-							<tr>
-								<td>
-									{{ form_row(form.bonsai) }}
-								</td>
-							</tr>
-							<tr>
-								<td align="center">
-									{{ form_row(form.enviar) }}
-								</td>
-							</tr>
-						</table>
-					</td>
-					<td>
-						{{ form_errors(form) }}
-						{{ form_rest(form) }}
-					</td>
-				</tr>
-			</table>
+			<div class="twelve columns">
+				<div class="six columns">
+					{{ form_row(form.accion) }}
+				</div>
+				
+				<div class="four columns">
+					{{ form_row(form.bonsai) }}
+					{{ form_row(form.enviar) }}
+				</div>
+			</div>
 		{{ form_end(form) }}
 		
-		<ul>
-			{% for bonsai in bonsais %}
-				<li>{{ bonsai.nombre }} - <a href="{{ path('bonsai_gestor_ficha', {'id': bonsai.id, 'nombre' : bonsai.nombre}) }}">Ver Ficha</a></li>
-			{% endfor %}
-		</ul>
+		{% for bonsai in bonsais %}
+			<div class="twelve columns" id="item_lista">
+				{% for imagen in bonsai.imagenes if imagen.principal %}
+					<img src="{{ asset('uploads/documents/' ~ imagen.ruta) }}" height="10" width="10" />
+				{% endfor %}
+				{{ bonsai.nombre }}
+				<a href="{{ path('bonsai_gestor_ficha', {'id': bonsai.id}) }}">Ver Ficha</a> - 
+				<a href="{{ path('bonsai_gestor_editar', {'id': bonsai.id}) }}">Editar</a> - 
+				<a href="{{ path('bonsai_gestor_borrar', {'id': bonsai.id}) }}">Eliminar</a>
+			</div>
+		{% endfor %}
 {% endblock %}

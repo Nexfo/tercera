@@ -2,7 +2,10 @@
 
 namespace Bonsai\GestorBundle\Entity;
 
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+use Bonsai\GestorBundle\Entity\Imagen;
 
 /**
  * Bonsai
@@ -21,6 +24,10 @@ class Bonsai
      */
     private $id;
 
+	public function __construct()
+    {
+        $this->imagenes = new ArrayCollection();
+    }
 
     /**
      * Get id
@@ -41,7 +48,7 @@ class Bonsai
 	 
 	/**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="bonsais")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete="CASCADE")
 	 */
 	private $usuario;
 	
@@ -60,6 +67,21 @@ class Bonsai
      * @ORM\JoinColumn(name="estilo_id", referencedColumnName="id")
     */
     private $estilo;
+	
+	/**
+     * @ORM\OneToMany(targetEntity="Accion", mappedBy="bonsai")
+     */
+	private $acciones;
+	
+    /**
+     * @ORM\OneToMany(targetEntity="Imagen", mappedBy="bonsai")
+     */
+	private $imagenes;
+	
+	/**
+	* @Assert\Type(type="Bonsai\GestorBundle\Entity\Imagen")
+	*/
+	protected $imagen;
 
     /**
      * Set nombre
@@ -174,5 +196,81 @@ class Bonsai
     public function getEstilo()
     {
         return $this->estilo;
+    }
+
+    /**
+     * Add imagenes
+     *
+     * @param \Bonsai\GestorBundle\Entity\Imagen $imagenes
+     * @return Bonsai
+     */
+    public function addImagene(\Bonsai\GestorBundle\Entity\Imagen $imagenes)
+    {
+        $this->imagenes[] = $imagenes;
+
+        return $this;
+    }
+
+    /**
+     * Remove imagenes
+     *
+     * @param \Bonsai\GestorBundle\Entity\Imagen $imagenes
+     */
+    public function removeImagene(\Bonsai\GestorBundle\Entity\Imagen $imagenes)
+    {
+        $this->imagenes->removeElement($imagenes);
+    }
+
+    /**
+     * Get imagenes
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getImagenes()
+    {
+        return $this->imagenes;
+    }
+	
+	public function getImagen()
+    {
+        return $this->imagen;
+    }
+ 
+    public function setImagen(Imagen $imagen = null)
+    {
+        $this->imagen = $imagen;
+	}
+
+    /**
+     * Add acciones
+     *
+     * @param \Bonsai\GestorBundle\Entity\Accion $acciones
+     * @return Bonsai
+     */
+    public function addAccione(\Bonsai\GestorBundle\Entity\Accion $acciones)
+    {
+        $this->acciones[] = $acciones;
+
+        return $this;
+    }
+
+    /**
+     * Remove acciones
+     *
+     * @param \Bonsai\GestorBundle\Entity\Accion $acciones
+     */
+    public function removeAccione(\Bonsai\GestorBundle\Entity\Accion $acciones)
+    {
+        $this->acciones->removeElement($acciones);
+    }
+
+    /**
+     * Get acciones
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getAcciones()
+    {
+        return $this->acciones;
     }
 }

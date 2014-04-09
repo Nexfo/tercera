@@ -11,6 +11,9 @@ class AgregarController extends Controller
 {
     public function agregarAction(Request $request)
     {
+		/*$repository = $this->getDoctrine()->getRepository('BonsaiGestorBundle:Bonsai');
+		$bonsai = $repository->find(5);*/
+	
 		$bonsai = new Bonsai();
 		$form = $this->createForm(new BonsaiType(), $bonsai);
 		
@@ -23,6 +26,62 @@ class AgregarController extends Controller
 			$bonsai->setUsuario($user);
 			
 			$em->persist($bonsai);
+			
+			if ($bonsai->getImagen()->getRuta() != "") {
+				$imagen = $bonsai->getImagen();
+				$imagen->setBonsai($bonsai);
+				$imagen->setPrincipal(1);
+				$em->persist($imagen);
+			}
+			
+			$em->flush();
+
+			return $this->redirect($this->generateUrl('bonsai_gestor_homepage'));
+		}
+		
+        return $this->render('BonsaiGestorBundle:Agregar:agregar.html.twig', array(
+            'form' => $form->createView(),
+        ));
+    }
+	
+	public function editarAction(Request $request, $id)
+    {
+		$user = $this->get('security.context')->getToken()->getUser();
+		$bonsais = $user->getBonsais();
+		
+		$bonsaiEditar = null;
+		
+		foreach ($bonsais as $bonsai) {
+			if ($bonsai->getId() == $id) {
+				$bonsaiEditar = $bonsai;
+			}
+		}
+	
+		//$bonsai = new Bonsai();
+		$form = $this->createForm(new BonsaiType(), $bonsai);
+		
+		$form->handleRequest($request);
+
+		if ($form->isValid()) {
+			$em = $this->getDoctrine()->getManager();
+			
+			$user = $this->get('security.context')->getToken()->getUser();
+			$bonsai->setUsuario($user);
+			
+			$em->persist($bonsai);
+			
+			if ($bonsai->getImagen()->getRuta() != "") {
+				$imagen = $bonsai->getImagen();
+				$imagen->setBonsai($bonsai);
+				
+				foreach ($bonsai->getImagenes() as $img) {
+					$img->setPrincipal(0);
+				}
+				
+				$imagen->setPrincipal(1);
+				$em->persist($imagen);
+			}
+			
 			$em->flush();
 
 			return $this->redirect($this->generateUrl('bonsai_gestor_homepage'));

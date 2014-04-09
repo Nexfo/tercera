@@ -37,8 +37,8 @@ class Accion
 	
 	
 	/**
-     * @ORM\ManyToOne(targetEntity="Bonsai")
-     * @ORM\JoinColumn(name="bonsai_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="Bonsai", inversedBy="acciones")
+     * @ORM\JoinColumn(name="bonsai_id", referencedColumnName="id", onDelete="CASCADE")
 	 */
 	private $bonsai;
 

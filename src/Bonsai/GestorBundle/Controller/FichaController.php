@@ -30,13 +30,22 @@ class FichaController extends Controller
 			return $this->redirect($this->generateUrl('bonsai_gestor_homepage'));
 		}*/
 		
-		$repository = $this->getDoctrine()->getRepository('BonsaiGestorBundle:Accion');
+		/*$repository = $this->getDoctrine()->getRepository('BonsaiGestorBundle:Accion');
 		$acciones = $repository->findBy(
 			array('bonsai'  => $id)
-		);
-
-
+		);*/
 		
-        return $this->render('BonsaiGestorBundle:Ficha:ficha.html.twig', array('acciones' => $acciones));
+		$user = $this->get('security.context')->getToken()->getUser();
+		$bonsais = $user->getBonsais();
+		
+		foreach ($bonsais as $bonsai) {
+			if ($bonsai->getId() == $id) {
+				return $this->render('BonsaiGestorBundle:Ficha:ficha.html.twig', array('acciones' => $bonsai->getAcciones()));
+			}
+		}
+
+		return $this->redirect($this->generateUrl('bonsai_gestor_homepage'));
+		
+        //return $this->render('BonsaiGestorBundle:Ficha:ficha.html.twig', array('acciones' => $acciones));
     }
 }

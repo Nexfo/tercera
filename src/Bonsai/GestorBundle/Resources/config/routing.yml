@@ -11,7 +11,19 @@ bonsai_gestor_agregar:
     defaults: { _controller: BonsaiGestorBundle:Agregar:agregar }
 
 bonsai_gestor_ficha:
-    pattern: /gestor/ficha/{id}/{nombre}
+    pattern: /gestor/ficha/{id}
     defaults: { _controller: BonsaiGestorBundle:Ficha:mostrar }
+    requirements:
+        id:  \d+
+
+bonsai_gestor_borrar:
+    pattern: /gestor/borrar/{id}
+    defaults: { _controller: BonsaiGestorBundle:Gestor:borrar }
+    requirements:
+        id:  \d+
+
+bonsai_gestor_editar:
+    pattern: /gestor/editar/{id}
+    defaults: { _controller: BonsaiGestorBundle:Agregar:editar }
     requirements:
         id:  \d+
