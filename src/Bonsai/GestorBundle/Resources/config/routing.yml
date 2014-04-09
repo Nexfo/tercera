@@ -1,7 +1,17 @@
 bonsai_gestor_homepage:
-    pattern:  /
+    pattern:  /gestor
     defaults: { _controller: BonsaiGestorBundle:Gestor:index }
 
-bonsai_gestor_registro:
-    pattern: /registrar
-    defaults: { _controller:  BonsaiGestorBundle:Usuarios:registrar }
+bonsai_gestor_homepage_dos:
+    pattern:  /gestor/
+    defaults: { _controller: BonsaiGestorBundle:Gestor:index }
+
+bonsai_gestor_agregar:
+    pattern: /gestor/agregar
+    defaults: { _controller: BonsaiGestorBundle:Agregar:agregar }
+
+bonsai_gestor_ficha:
+    pattern: /gestor/ficha/{id}/{nombre}
+    defaults: { _controller: BonsaiGestorBundle:Ficha:mostrar }
+    requirements:
+        id:  \d+

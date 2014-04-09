@@ -135,18 +135,40 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
 
         }
 
-        // bonsai_gestor_homepage
+        // paginas_principal_homepage
         if (rtrim($pathinfo, '/') === '') {
             if (substr($pathinfo, -1) !== '/') {
-                return $this->redirect($pathinfo.'/', 'bonsai_gestor_homepage');
+                return $this->redirect($pathinfo.'/', 'paginas_principal_homepage');
             }
 
-            return array (  '_controller' => 'Bonsai\\GestorBundle\\Controller\\GestorController::indexAction',  '_route' => 'bonsai_gestor_homepage',);
+            return array (  '_controller' => 'Paginas\\PrincipalBundle\\Controller\\IndexController::indexAction',  '_route' => 'paginas_principal_homepage',);
         }
 
-        // bonsai_gestor_registro
-        if ($pathinfo === '/registrar') {
-            return array (  '_controller' => 'Bonsai\\GestorBundle\\Controller\\UsuariosController::registrarAction',  '_route' => 'bonsai_gestor_registro',);
+        if (0 === strpos($pathinfo, '/gestor')) {
+            // bonsai_gestor_homepage
+            if ($pathinfo === '/gestor') {
+                return array (  '_controller' => 'Bonsai\\GestorBundle\\Controller\\GestorController::indexAction',  '_route' => 'bonsai_gestor_homepage',);
+            }
+
+            // bonsai_gestor_homepage_dos
+            if (rtrim($pathinfo, '/') === '/gestor') {
+                if (substr($pathinfo, -1) !== '/') {
+                    return $this->redirect($pathinfo.'/', 'bonsai_gestor_homepage_dos');
+                }
+
+                return array (  '_controller' => 'Bonsai\\GestorBundle\\Controller\\GestorController::indexAction',  '_route' => 'bonsai_gestor_homepage_dos',);
+            }
+
+            // bonsai_gestor_agregar
+            if ($pathinfo === '/gestor/agregar') {
+                return array (  '_controller' => 'Bonsai\\GestorBundle\\Controller\\AgregarController::agregarAction',  '_route' => 'bonsai_gestor_agregar',);
+            }
+
+            // bonsai_gestor_ficha
+            if (0 === strpos($pathinfo, '/gestor/ficha') && preg_match('#^/gestor/ficha/(?P<id>\\d+)/(?P<nombre>[^/]++)$#s', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'bonsai_gestor_ficha')), array (  '_controller' => 'Bonsai\\GestorBundle\\Controller\\FichaController::mostrarAction',));
+            }
+
         }
 
         if (0 === strpos($pathinfo, '/log')) {
