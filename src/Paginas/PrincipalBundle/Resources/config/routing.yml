@@ -1,0 +1,3 @@
+paginas_principal_homepage:
+    pattern:  /
+    defaults: { _controller: PaginasPrincipalBundle:Index:index }

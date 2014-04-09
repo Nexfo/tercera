@@ -4,6 +4,7 @@ namespace Bonsai\GestorBundle\Entity;
 
 use FOS\UserBundle\Entity\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity
@@ -17,41 +18,17 @@ class User extends BaseUser
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
+	
+    /**
+     * @ORM\OneToMany(targetEntity="Bonsai", mappedBy="usuario")
+     */
+	protected $bonsais;
 
     public function __construct()
     {
         parent::__construct();
-        // your own logic
-    }
-
-    /**
-     * @var string $username
-     *
-     * @ORM\Column(name="username", type="string", length=20, unique=true)
-     */
-    protected $username;
-
-    /**
-     * @var string $password
-     *
-     * @ORM\Column(name="password", type="string", length=255)
-     */
-    protected $password;
-
-
-    /**
-    * @var string salt
-    *
-    * @ORM\Column(name="salt", type="string", length=255)
-    */
-    protected $salt;
-
-    /**
-     * @var string $email
-     *
-     * @ORM\Column(name="email", type="string", length=150, unique=true)
-     */
-    protected $email;	
+        $this->bonsais = new ArrayCollection();
+    }	
 
     /**
      * Get id
@@ -64,94 +41,35 @@ class User extends BaseUser
     }
 
     /**
-     * Set username
+     * Add bonsais
      *
-     * @param string $username
+     * @param \Bonsai\GestorBundle\Entity\Bonsai $bonsais
      * @return User
      */
-    public function setUsername($username)
+    public function addBonsai(\Bonsai\GestorBundle\Entity\Bonsai $bonsais)
     {
-        $this->username = $username;
+        $this->bonsais[] = $bonsais;
 
         return $this;
     }
 
     /**
-     * Get username
+     * Remove bonsais
      *
-     * @return string 
+     * @param \Bonsai\GestorBundle\Entity\Bonsai $bonsais
      */
-    public function getUsername()
+    public function removeBonsai(\Bonsai\GestorBundle\Entity\Bonsai $bonsais)
     {
-        return $this->username;
+        $this->bonsais->removeElement($bonsais);
     }
 
     /**
-     * Set password
+     * Get bonsais
      *
-     * @param string $password
-     * @return User
+     * @return \Doctrine\Common\Collections\Collection 
      */
-    public function setPassword($password)
+    public function getBonsais()
     {
-        $this->password = $password;
-
-        return $this;
-    }
-
-    /**
-     * Get password
-     *
-     * @return string 
-     */
-    public function getPassword()
-    {
-        return $this->password;
-    }
-
-    /**
-     * Set salt
-     *
-     * @param string $salt
-     * @return User
-     */
-    public function setSalt($salt)
-    {
-        $this->salt = $salt;
-
-        return $this;
-    }
-
-    /**
-     * Get salt
-     *
-     * @return string 
-     */
-    public function getSalt()
-    {
-        return $this->salt;
-    }
-
-    /**
-     * Set email
-     *
-     * @param string $email
-     * @return User
-     */
-    public function setEmail($email)
-    {
-        $this->email = $email;
-
-        return $this;
-    }
-
-    /**
-     * Get email
-     *
-     * @return string 
-     */
-    public function getEmail()
-    {
-        return $this->email;
+        return $this->bonsais;
     }
 }

@@ -29,10 +29,36 @@ class __TwigTemplate_96812c49fcd7c00f90cd157f30d973917e11e40bceaee15d0a0f292f6b1
     {
         // line 4
         echo "\t<h1>Página principal</h1>
-\t<a href=\"";
-        // line 5
-        echo $this->env->getExtension('routing')->getPath("bonsai_gestor_registro");
-        echo "\">Registro</a>
+\t<ul>
+\t\t<li><a href=\"";
+        // line 6
+        echo $this->env->getExtension('routing')->getPath("bonsai_gestor_agregar");
+        echo "\">Añadir Bonsai</a></li>
+\t</ul>
+\t
+\t<ul>
+\t\t";
+        // line 10
+        $context['_parent'] = (array) $context;
+        $context['_seq'] = twig_ensure_traversable($this->getContext($context, "bonsais"));
+        foreach ($context['_seq'] as $context["_key"] => $context["bonsai"]) {
+            // line 11
+            echo "\t\t\t<li>";
+            echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "bonsai"), "nombre"), "html", null, true);
+            echo "</li>
+\t\t";
+        }
+        $_parent = $context['_parent'];
+        unset($context['_seq'], $context['_iterated'], $context['_key'], $context['bonsai'], $context['_parent'], $context['loop']);
+        $context = array_intersect_key($context, $_parent) + $_parent;
+        // line 13
+        echo "\t</ul>
+\t
+\t";
+        // line 15
+        echo         $this->env->getExtension('form')->renderer->renderBlock($this->getContext($context, "form"), 'form');
+        echo "
+\t
 ";
     }
 
@@ -48,6 +74,6 @@ class __TwigTemplate_96812c49fcd7c00f90cd157f30d973917e11e40bceaee15d0a0f292f6b1
 
     public function getDebugInfo()
     {
-        return array (  34 => 5,  31 => 4,  28 => 3,);
+        return array (  59 => 15,  55 => 13,  46 => 11,  42 => 10,  35 => 6,  31 => 4,  28 => 3,);
     }
 }
