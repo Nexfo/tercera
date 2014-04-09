@@ -1,0 +1,9 @@
+{% extends 'BonsaiGestorBundle::layout.html.twig' %}
+
+{% block centro %}
+	<ul>
+		{% for accion in acciones %}
+			<li>{{ accion.accion }} - {{ accion.fecha|date('Y-m-d H:i:s') }}</li>
+		{% endfor %}
+	</ul>
+{% endblock %}

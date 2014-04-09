@@ -1,0 +1,30 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+	<div class="sixteen columns">
+		<h1 class="remove-bottom" style="margin-top: 40px">Página principal</h1>
+		<hr />
+	</div>
+	
+	<div class="four columns">
+		<ul>
+			<li><a href="{{ path('bonsai_gestor_homepage') }}">Inicio</a></li>
+			<li><a href="{{ path('bonsai_gestor_agregar') }}">Añadir Bonsai</a></li>
+		</ul>
+		
+		<p class="remove-bottom" style="margin-top: 40px">
+			{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+				{{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} |
+				<a href="{{ path('fos_user_security_logout') }}">
+					{{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+				</a>
+			{% else %}
+				<a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
+			{% endif %}
+		</p>
+	</div>
+	
+	<div class="twelve columns">
+		{% block centro %}{% endblock %}
+	</div>
+{% endblock %}
