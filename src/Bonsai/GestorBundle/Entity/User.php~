@@ -21,6 +21,7 @@ class User extends BaseUser
 	
     /**
      * @ORM\OneToMany(targetEntity="Bonsai", mappedBy="usuario")
+	 * @ORM\OrderBy({"nombre" = "ASC"})
      */
 	protected $bonsais;
 

@@ -70,6 +70,7 @@ class Bonsai
 	
 	/**
      * @ORM\OneToMany(targetEntity="Accion", mappedBy="bonsai")
+	 * @ORM\OrderBy({"fecha" = "DESC"})
      */
 	private $acciones;
 	

@@ -40,7 +40,7 @@ class FichaController extends Controller
 		
 		foreach ($bonsais as $bonsai) {
 			if ($bonsai->getId() == $id) {
-				return $this->render('BonsaiGestorBundle:Ficha:ficha.html.twig', array('acciones' => $bonsai->getAcciones()));
+				return $this->render('BonsaiGestorBundle:Ficha:ficha.html.twig', array('bonsai' => $bonsai));
 			}
 		}
 

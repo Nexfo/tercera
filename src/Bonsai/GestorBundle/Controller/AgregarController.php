@@ -11,9 +11,6 @@ class AgregarController extends Controller
 {
     public function agregarAction(Request $request)
     {
-		/*$repository = $this->getDoctrine()->getRepository('BonsaiGestorBundle:Bonsai');
-		$bonsai = $repository->find(5);*/
-	
 		$bonsai = new Bonsai();
 		$form = $this->createForm(new BonsaiType(), $bonsai);
 		
@@ -57,7 +54,6 @@ class AgregarController extends Controller
 			}
 		}
 	
-		//$bonsai = new Bonsai();
 		$form = $this->createForm(new BonsaiType(), $bonsai);
 		
 		$form->handleRequest($request);

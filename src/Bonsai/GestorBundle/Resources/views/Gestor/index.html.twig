@@ -13,16 +13,34 @@
 				</div>
 			</div>
 		{{ form_end(form) }}
+		<br />
+		<hr />
 		
 		{% for bonsai in bonsais %}
 			<div class="twelve columns" id="item_lista">
-				{% for imagen in bonsai.imagenes if imagen.principal %}
-					<img src="{{ asset('uploads/documents/' ~ imagen.ruta) }}" height="10" width="10" />
-				{% endfor %}
-				{{ bonsai.nombre }}
-				<a href="{{ path('bonsai_gestor_ficha', {'id': bonsai.id}) }}">Ver Ficha</a> - 
-				<a href="{{ path('bonsai_gestor_editar', {'id': bonsai.id}) }}">Editar</a> - 
-				<a href="{{ path('bonsai_gestor_borrar', {'id': bonsai.id}) }}">Eliminar</a>
+				{% if bonsai.imagenes is empty %}
+					<div class="two columns">
+						<img src="{{ asset('noImagen.png') }}" />
+					</div>
+				{% else %}
+					{% for imagen in bonsai.imagenes if imagen.principal %}
+						<div class="two columns">
+							<img src="{{ asset('uploads/documents/' ~ imagen.ruta) }}" />
+						</div>
+					{% endfor %}
+				{% endif %}
+				<div class="three columns">
+					{{ bonsai.nombre }}
+				</div>
+				<div class="two columns">
+					<a href="{{ path('bonsai_gestor_ficha', {'id': bonsai.id}) }}">Ver Ficha</a>
+				</div>
+				<div class="two columns">
+					<a href="{{ path('bonsai_gestor_editar', {'id': bonsai.id}) }}">Editar</a>
+				</div>
+				<div class="two columns">
+					<a href="{{ path('bonsai_gestor_borrar', {'id': bonsai.id}) }}">Eliminar</a>
+				</div>
 			</div>
 		{% endfor %}
 {% endblock %}

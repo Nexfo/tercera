@@ -26,12 +26,12 @@ class Imagen
 	
 	/**
      * @ORM\ManyToOne(targetEntity="Bonsai", inversedBy="imagenes")
-     * @ORM\JoinColumn(name="bonsai_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="bonsai_id", referencedColumnName="id", onDelete="CASCADE")
 	 */
 	private $bonsai;
 	
 	/**
-	 * @ORM\Column(type="boolean")
+	 * @ORM\Column(type="boolean", nullable=true)
 	 */
 	private $principal;
 

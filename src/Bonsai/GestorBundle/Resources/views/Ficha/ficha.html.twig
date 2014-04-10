@@ -1,9 +1,41 @@
 {% extends 'BonsaiGestorBundle::layout.html.twig' %}
 
 {% block centro %}
-	<ul>
+	<div class="eleven columns">
+		<div class="six columns">
+			{% for accion in bonsai.acciones %}
+				<div class="two columns">{{ accion.accion }}</div>
+				<div class="three columns">{{ accion.fecha|date }}</div>
+				<hr />
+			{% endfor %}
+		</div>
+		<div class="four columns">
+			<div class="four columns">
+				{% if bonsai.imagenes is empty %}
+					<img src="{{ asset('noImagen.png') }}" width="100%" />
+				{% else %}
+					{% for imagen in bonsai.imagenes if imagen.principal %}
+						<img src="{{ asset('uploads/documents/' ~ imagen.ruta) }}" width="100%" />
+					{% endfor %}
+				{% endif %}
+			</div>
+			<div class="four columns"><br /></div>
+			<div class="four columns" id="datos_bonsai">
+				<b>Nombre:</b> {{ bonsai.nombre }}<br />
+				<b>Año de Adquisición:</b> {{ bonsai.anioadquisicion }}<br />
+				<b>Edad de Adquisición:</b> {{ bonsai.edadadquisicion }} años<br />
+				<b>Estilo:</b> {{ bonsai.estilo.nombre }}
+			</div>
+		</div>
+	</div>
+	
+	<div class="eleven columns">
+		<!-- Y Otra -->
+	</div>
+
+	{# <ul>
 		{% for accion in acciones %}
-			<li>{{ accion.accion }} - {{ accion.fecha|date('Y-m-d H:i:s') }}</li>
+			<li>{{ accion.accion }} - {{ accion.fecha|date('d-m H:i') }}</li>
 		{% endfor %}
-	</ul>
+	</ul> #}
 {% endblock %}

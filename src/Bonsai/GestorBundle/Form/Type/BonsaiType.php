@@ -4,6 +4,7 @@ namespace Bonsai\GestorBundle\Form\Type;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Doctrine\ORM\EntityRepository;
 
 //use Bonsai\GestorBundle\Form\Type\ImagenType;
  
@@ -16,7 +17,11 @@ class BonsaiType extends AbstractType
 			->add('anio_adquisicion', 'text', array('label' => 'Año Adquisición'))
 			->add('edad_adquisicion', 'text', array('label' => 'Edad Adquisición'))
 			->add('estilo', 'entity', array('class' => 'BonsaiGestorBundle:Estilo',
-							'property' => 'nombre',))
+							'property' => 'nombre',
+							'query_builder' => function(EntityRepository $er) {
+								return $er->createQueryBuilder('e')
+								->orderBy('e.nombre', 'ASC');
+							}))
 			->add('imagen', new ImagenType())
             ->add('guardar', 'submit');
     }

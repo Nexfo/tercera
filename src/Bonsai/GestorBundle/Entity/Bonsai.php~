@@ -48,7 +48,7 @@ class Bonsai
 	 
 	/**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="bonsais")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete="CASCADE")
 	 */
 	private $usuario;
 	
@@ -70,6 +70,7 @@ class Bonsai
 	
 	/**
      * @ORM\OneToMany(targetEntity="Accion", mappedBy="bonsai")
+	 * @ORM\OrderBy({"fecha" = "DESC"})
      */
 	private $acciones;
 	
@@ -240,4 +241,37 @@ class Bonsai
     {
         $this->imagen = $imagen;
 	}
+
+    /**
+     * Add acciones
+     *
+     * @param \Bonsai\GestorBundle\Entity\Accion $acciones
+     * @return Bonsai
+     */
+    public function addAccione(\Bonsai\GestorBundle\Entity\Accion $acciones)
+    {
+        $this->acciones[] = $acciones;
+
+        return $this;
+    }
+
+    /**
+     * Remove acciones
+     *
+     * @param \Bonsai\GestorBundle\Entity\Accion $acciones
+     */
+    public function removeAccione(\Bonsai\GestorBundle\Entity\Accion $acciones)
+    {
+        $this->acciones->removeElement($acciones);
+    }
+
+    /**
+     * Get acciones
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getAcciones()
+    {
+        return $this->acciones;
+    }
 }

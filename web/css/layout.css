@@ -1,1 +1,4 @@
 #item_lista:hover {background-color: #dddddd}
+#item_lista img {width:100%}
+
+#datos_bonsai b {font-weight:bold;}

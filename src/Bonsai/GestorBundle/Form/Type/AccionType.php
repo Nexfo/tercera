@@ -4,6 +4,7 @@ namespace Bonsai\GestorBundle\Form\Type;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Doctrine\ORM\EntityRepository;
  
 class AccionType extends AbstractType
 {
@@ -12,8 +13,12 @@ class AccionType extends AbstractType
 		$builder
             ->add('accion', 'textarea', array('label' => 'Acción', 'attr' => array('style' => 'height: 70px')))
 			->add('bonsai', 'entity', array('class' => 'BonsaiGestorBundle:Bonsai',
-							'property' => 'nombre',))
-            ->add('enviar', 'submit', array('attr' => array('style' => 'margin: 0px auto; display: block')));
+							'property' => 'nombre',
+							'query_builder' => function(EntityRepository $er) {
+								return $er->createQueryBuilder('a')
+								->orderBy('a.nombre', 'ASC');
+							}))
+            ->add('enviar', 'submit', array('attr' => array('style' => 'margin: 10px auto; display: block')));
     }
  
     public function getName()
