@@ -7,9 +7,12 @@
 	</div>
 	
 	<div class="four columns">
+		
 		<ul>
+		{% block menu_lateral %}
 			<li><a href="{{ path('bonsai_gestor_homepage') }}">Inicio</a></li>
 			<li><a href="{{ path('bonsai_gestor_agregar') }}">Añadir Bonsai</a></li>
+		{% endblock %}
 		</ul>
 		
 		<p class="remove-bottom" style="margin-top: 40px">

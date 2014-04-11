@@ -1,16 +1,27 @@
 {% extends 'BonsaiGestorBundle::layout.html.twig' %}
 
+{% block menu_lateral %}
+	{{ parent() }}
+	<li><a href="{{ path('bonsai_gestor_editar', {'id': bonsai.id}) }}">Editar {{ bonsai.nombre }}</a></li>
+{% endblock %}
+
 {% block centro %}
 	<div class="eleven columns">
-		<div class="six columns">
+		<div class="seven columns">
 			{% for accion in bonsai.acciones %}
-				<div class="two columns">{{ accion.accion }}</div>
-				<div class="three columns">{{ accion.fecha|date }}</div>
+				<div class="four columns"><p onclick="desplegar(this)" class="accion" style="cursor: pointer; height: 45px; overflow: hidden">{{ accion.accion }}<p></div>
+				<div class="two columns">
+					{{ accion.fecha|date('d, M - H:i') }}
+					<br />
+					<p align="center">
+						<a href="{{ path('bonsai_gestor_editar_accion', {'idBonsai': bonsai.id, 'idAccion': accion.id}) }}">Editar</a>
+					</p>
+				</div>
 				<hr />
 			{% endfor %}
 		</div>
-		<div class="four columns">
-			<div class="four columns">
+		<div class="three columns">
+			<div class="three columns">
 				{% if bonsai.imagenes is empty %}
 					<img src="{{ asset('noImagen.png') }}" width="100%" />
 				{% else %}
@@ -19,11 +30,15 @@
 					{% endfor %}
 				{% endif %}
 			</div>
-			<div class="four columns"><br /></div>
-			<div class="four columns" id="datos_bonsai">
+			<div class="three columns"><br /></div>
+			<div class="three columns" id="datos_bonsai">
 				<b>Nombre:</b> {{ bonsai.nombre }}<br />
-				<b>Año de Adquisición:</b> {{ bonsai.anioadquisicion }}<br />
-				<b>Edad de Adquisición:</b> {{ bonsai.edadadquisicion }} años<br />
+				{% if bonsai.anioadquisicion != null %}
+					<b>Año de Adquisición:</b> {{ bonsai.anioadquisicion }}<br />
+				{% endif %}
+				{% if bonsai.edadadquisicion != null %}
+					<b>Edad de Adquisición:</b> {{ bonsai.edadadquisicion ~ ' años' }}<br />
+				{% endif %}
 				<b>Estilo:</b> {{ bonsai.estilo.nombre }}
 			</div>
 		</div>
@@ -32,10 +47,14 @@
 	<div class="eleven columns">
 		<!-- Y Otra -->
 	</div>
-
-	{# <ul>
-		{% for accion in acciones %}
-			<li>{{ accion.accion }} - {{ accion.fecha|date('d-m H:i') }}</li>
-		{% endfor %}
-	</ul> #}
+	
+	<script>
+		function desplegar(myP) {
+			var acciones = document.querySelectorAll(".accion");
+			for (var f = 0; f < acciones.length; f++) {
+				acciones[f].style.height = "45px";
+			}
+			myP.style.height = "";
+		}
+	</script>
 {% endblock %}

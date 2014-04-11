@@ -27,3 +27,10 @@ bonsai_gestor_editar:
     defaults: { _controller: BonsaiGestorBundle:Agregar:editar }
     requirements:
         id:  \d+
+
+bonsai_gestor_editar_accion:
+    pattern: /gestor/{idBonsai}/{idAccion}/editar
+    defaults: { _controller: BonsaiGestorBundle:Accion:editar }
+    requirements:
+        idBonsai:  \d+
+        idAccion:  \d+

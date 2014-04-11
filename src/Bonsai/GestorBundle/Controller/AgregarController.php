@@ -54,7 +54,7 @@ class AgregarController extends Controller
 			}
 		}
 	
-		$form = $this->createForm(new BonsaiType(), $bonsai);
+		$form = $this->createForm(new BonsaiType(), $bonsaiEditar);
 		
 		$form->handleRequest($request);
 
@@ -62,15 +62,15 @@ class AgregarController extends Controller
 			$em = $this->getDoctrine()->getManager();
 			
 			$user = $this->get('security.context')->getToken()->getUser();
-			$bonsai->setUsuario($user);
+			$bonsaiEditar->setUsuario($user);
 			
 			$em->persist($bonsai);
 			
-			if ($bonsai->getImagen()->getRuta() != "") {
-				$imagen = $bonsai->getImagen();
-				$imagen->setBonsai($bonsai);
+			if ($bonsaiEditar->getImagen()->getRuta() != "") {
+				$imagen = $bonsaiEditar->getImagen();
+				$imagen->setBonsai($bonsaiEditar);
 				
-				foreach ($bonsai->getImagenes() as $img) {
+				foreach ($bonsaiEditar->getImagenes() as $img) {
 					$img->setPrincipal(0);
 				}
 				

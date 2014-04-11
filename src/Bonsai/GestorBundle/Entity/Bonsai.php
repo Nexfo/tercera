@@ -10,7 +10,7 @@ use Bonsai\GestorBundle\Entity\Imagen;
 /**
  * Bonsai
  *
- * @ORM\Table(name="bonsais")
+ * @ORM\Table()
  * @ORM\Entity
  */
 class Bonsai
@@ -53,12 +53,12 @@ class Bonsai
 	private $usuario;
 	
 	/**
-	 * @ORM\Column(name="anio_adquisicion", type="integer", length=4)
+	 * @ORM\Column(name="anio_adquisicion", type="integer", length=4, nullable=true)
 	*/
 	private $anio_adquisicion;
 	
 	/**
-	 * @ORM\Column(name="edad_adquisicion", type="integer", length=4)
+	 * @ORM\Column(name="edad_adquisicion", type="integer", length=4, nullable=true)
 	*/
 	private $edad_adquisicion;
 	
@@ -123,7 +123,7 @@ class Bonsai
     /**
      * Get usuario
      *
-     * @return \Bonsai\GestorBundle\Entity\User 
+     * @return \Bonsai\GestorBundle\Entity\User
      */
     public function getUsuario()
     {

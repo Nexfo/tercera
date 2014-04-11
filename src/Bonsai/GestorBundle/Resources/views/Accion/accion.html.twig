@@ -1,0 +1,10 @@
+{% extends 'BonsaiGestorBundle::layout.html.twig' %}
+
+{% block menu_lateral %}
+	{{ parent() }}
+	<li><a href="{{ path('bonsai_gestor_ficha', {'id': bonsai.id}) }}">Ficha de {{ bonsai.nombre }}</a></li>
+{% endblock %}
+
+{% block centro %}
+	{{ form(form) }}
+{% endblock %}
