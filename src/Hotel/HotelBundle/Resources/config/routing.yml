@@ -1,0 +1,3 @@
+hotel_homepage:
+    pattern:  /hotel
+    defaults: { _controller: HotelBundle:Default:index }
