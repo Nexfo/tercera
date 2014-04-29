@@ -20,7 +20,7 @@ class DefaultController extends Controller
 		))
 		->add('fecha_salida', 'date')
 		->add('startDate','datePicker',array())
-		->add('endDate','datePicker',array())
+		->add('endDate','datePicker')
         ->add('guardar', 'submit')
 		->getForm();
 		
