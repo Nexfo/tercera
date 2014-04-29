@@ -20,7 +20,6 @@
         "sensio/generator-bundle": "~2.3",
         "incenteev/composer-parameter-handler": "~2.0",
 		"friendsofsymfony/user-bundle": "*",
-		"carlescliment/calendar-bundle": "dev-master"
     },
     "scripts": {
         "post-install-cmd": [
